@@ -1,3 +1,5 @@
+var part4 = {'Mike':'aye','Joe':'nay','Johnson':'aye','Peter':'aye'};
+
 function square(n)
 {
   return n*n;
@@ -34,11 +36,20 @@ function main()
 
 	if(getAverage2([17,42,72,39])==42)
 	{
-		console.log("Part 2 OK");
+		console.log("Part 3 OK");
 	}
 	else
 	{
-		console.log("Part 2 FAIL");
+		console.log("Part 3 FAIL");
+	}
+
+	if(cannonsReady(part4)==0)
+	{
+		console.log("Part 4 OK");
+	}
+	else
+	{
+		console.log("Part 4 FAIL");
 	}
 }
 
@@ -77,4 +88,17 @@ function getAverage2(marks)
 	var result = 0;
 	result = Math.floor(sum / marks.length);
 	return result;
+}
+
+//Part 4
+function cannonsReady(dict)
+{
+	for( var name in dict)
+	{
+		if(dict[name] === "nay")
+		{
+			return 0
+		}
+	}
+	return 1;
 }
