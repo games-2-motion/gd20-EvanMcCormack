@@ -51,6 +51,25 @@ function main()
 	{
 		console.log("Part 4 FAIL");
 	}
+
+	if(aliasGen("Carrick", "Dolan")=="Cancel Dio")
+	{
+		console.log("Part 5 OK");
+	}
+	else
+	{
+		console.log("Part 5 FAIL");
+	}
+
+	var BlackPearl = new Ship(50,10);
+	if(BlackPearl.isWorthIt())
+	{
+		console.log("Part 6 OK");
+	}
+	else
+	{
+		console.log("Part 6 FAIL");
+	}
 }
 
 //Part 1
@@ -101,4 +120,41 @@ function cannonsReady(dict)
 		}
 	}
 	return 1;
+}
+
+//Part 5
+function aliasGen(first, surname)
+{
+	var firstName = {A : "Alpha", B : "Bravo", C : "Cancel", D : "Dio"};
+	var secondname = {A : "Answer", B : "Boio", C : "Corner", D : "Dio"};
+
+	var answer = 0;
+	if (!isNaN(first[0]) || !isNaN(surname[0]))
+	{
+		console.log("Who named you that?");
+		return 0;
+	}
+	first = first[0].toUpperCase();
+	surname = surname[0].toUpperCase();
+	answer = firstName[first[0]] + " " + secondname[surname[0]];
+	return answer;
+}
+
+//Part 6
+function Ship(draft,crew) 
+{
+	this.draft = draft;
+	this.crew = crew;
+}
+
+Ship.prototype.isWorthIt = function()
+{
+	if (this.draft - (this.crew * 1.5) > 20)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
