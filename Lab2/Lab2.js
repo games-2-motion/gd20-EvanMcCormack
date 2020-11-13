@@ -31,6 +31,15 @@ function main()
 	{
 		console.log("Part 2 FAIL");
 	}
+
+	if(getAverage2([17,42,72,39])==42)
+	{
+		console.log("Part 2 OK");
+	}
+	else
+	{
+		console.log("Part 2 FAIL");
+	}
 }
 
 //Part 1
@@ -55,4 +64,17 @@ function getAverage(marks)
 		sum += marks[i];
 	}
 	return Math.floor(sum / marks.length);
+}
+
+//Part 3
+function getAverage2(marks)
+{
+	var sum = 0;
+	marks.forEach(item =>
+	{
+		sum+=item;
+	});
+	var result = 0;
+	result = Math.floor(sum / marks.length);
+	return result;
 }
