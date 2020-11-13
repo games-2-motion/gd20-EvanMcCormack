@@ -22,6 +22,15 @@ function main()
 	{
 		console.log("Part 1 FAIL");
 	}
+
+	if(getAverage([45,76,28])==49)
+	{
+		console.log("Part 2 OK");
+	}
+	else
+	{
+		console.log("Part 2 FAIL");
+	}
 }
 
 //Part 1
@@ -35,4 +44,15 @@ function howManyLightsabersDoYouOwn(name)
 	{
 		return 0;
 	}
+}
+
+//Part 2
+function getAverage(marks)
+{
+	var sum = 0;
+	for (var i = 0; i < marks.length; i++)
+	{
+		sum += marks[i];
+	}
+	return Math.floor(sum / marks.length);
 }
