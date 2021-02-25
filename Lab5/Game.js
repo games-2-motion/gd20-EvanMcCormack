@@ -25,24 +25,23 @@ class Game
     initCanvas()
     {
         // Use the document object to create a new element canvas.
-        var canvas = document.createElement("canvas");
+        this.canvas = document.createElement("canvas");
         // Assign the canvas an id so we can reference it elsewhere.
-        canvas.id = 'mycanvas';
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        this.canvas.id = 'mycanvas';
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
         // We want this to be a 2D canvas.
-        var ctx = canvas.getContext("2d");
+        var ctx = this.canvas.getContext("2d");
         // Adds the canvas element to the document.
-        document.body.appendChild(canvas);
+        document.body.appendChild(this.canvas);
         
         return ctx;
     }
     
-    update(){
-        console.log("Game Updating");  
+    update(){ 
         if(this.player.checkCollision(this.goal))
         {
-            console.log("Collision");
+            this.collisionResponse();
         }
         this.draw(this.ctx);
         window.requestAnimationFrame(this.boundRecursiveUpdate);
@@ -65,10 +64,25 @@ class Game
                 this.player.move(this.player.x + 10, this.player.y);
             }
     }  
+
+    collisionResponse(){
+        this.goal.kill();
+        this.ctx.save();
+        this.ctx.fillStyle = 'rgb(0,0,0)';
+        this.ctx.font = 'italic 40pt Calibri';
+        this.ctx.textBaseline = "top";
+        this.ctx.fillText("Game Over", (this.canvas.width / 2), (this.canvas.height / 2));
+        console.log(this.canvas.width / 2, this.canvas.height / 2);
+        this.ctx.restore();
+    }
     
     draw(ctx){
+        this.ctx.clearRect(0,0, this.ctx.width, this.ctx.height);
         this.player.draw(ctx);
-        this.goal.draw(ctx);
+        if(this.goal.isAlive()===true)
+        {
+            this.goal.draw(ctx);
+        }
     }
 }
 

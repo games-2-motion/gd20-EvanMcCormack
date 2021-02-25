@@ -10,6 +10,7 @@ class Goal
         this.width = width;
         this.height = height;
         this.colour = colour;
+        this.alive = true;
     }
 
     init(){
@@ -17,6 +18,14 @@ class Goal
     }
 
     update(){
+    }
+
+    kill(){
+        this.alive = false;
+    }
+
+    isAlive(){
+        return this.alive;
     }
 
     draw(ctx)
