@@ -53,7 +53,6 @@ class Sprite
 
     draw()
     {
-        console.log("Player Pos : " + this.xPos, this.yPos);
         this.ctx.drawImage(
             this.image,
             this.frameIndex * this.width / this.numberOfFrames,

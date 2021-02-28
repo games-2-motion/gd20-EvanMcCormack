@@ -47,19 +47,6 @@ class Player
         this.previousTime = now;
     }
 
-    animLoop(){
-        window.requestAnimationFrame(animLoop);
-    }
-
-    move(x, y){
-        this.x = x;
-        this.y = y;
-
-        ctx.clearRect(0,0, canvas.width, canvas.height);
-        
-        this.draw(ctx);
-    }
-
     draw(ctx)
     {
         ctx.clearRect(0, 0, ctx.width, ctx.height);
