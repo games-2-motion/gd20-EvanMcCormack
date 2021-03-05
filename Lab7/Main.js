@@ -4,6 +4,7 @@ function main()
     console.log(is_touch_device());
     document.addEventListener('touchstart', () => this.onTouchStart(event));
     document.addEventListener('touchmove', () => this.touchMove(event));
+    document.addEventListener('touchend', () => this.onTouchEnd(event));
     document.addEventListener('touchstart', function(e) {e.preventDefault();}, {passive: false});
 
     
@@ -27,19 +28,41 @@ function init()
 
 function onTouchStart(e)
 {
-    console.log("touches");
+    //console.log("touches");
     this.touches = e.touches;
+    this.time1 = new Date();
     // Print out (x,y) co-ords of touch: touches[0].clientX contains
     // the x position.
-    console.log(touches[0].clientX, touches[0].clientY);
+    //console.log(touches[0].clientX, touches[0].clientY);
 }
 
 function touchMove(e)
 {
-    
+    this.endTouches = e.touches;
     this.ctx.beginPath();
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.moveTo(this.touches[0].clientX, this.touches[0].clientY);
-    this.ctx.lineTo(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+    this.ctx.lineTo(this.endTouches[0].clientX, this.endTouches[0].clientY);
     this.ctx.stroke();
+}
+
+function onTouchEnd(e)
+{
+    this.time2 = new Date();
+    this.timeElapsed = this.time2 - this.time1;
+    this.length = Math.sqrt(((this.endTouches[0].clientX - this.touches[0].clientX) * (this.endTouches[0].clientX - this.touches[0].clientX))
+                            + ((this.endTouches[0].clientY - this.touches[0].clientY) * (this.endTouches[0].clientY - this.touches[0].clientY)));
+    console.log("Time Elapsed: " + this.timeElapsed);
+    console.log("Line Length:" + this.length);
+
+    if(this.length >= 100 && this.timeElapsed <= 200)
+    {
+        this.ctx.save();
+        this.ctx.fillStyle = 'rgb(0,0,0)';
+        this.ctx.font = 'italic 40pt Calibri';
+        this.ctx.textBaseline = "top";
+        this.ctx.fillText("Swipe", (this.canvas.width / 2), (this.canvas.height / 2));
+        console.log(this.canvas.width / 2, this.canvas.height / 2);
+        this.ctx.restore();
+    }
 }
